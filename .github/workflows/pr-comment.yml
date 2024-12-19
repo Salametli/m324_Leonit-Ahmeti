@@ -1,0 +1,20 @@
+name: Auto PR Comment
+
+on: [pull_request]
+
+jobs:
+  add-comment:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Comment on Pull Request
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: "Thank you for opening this pull request! 😊 Our team will review it shortly."
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          mode: upsert
+          create_if_not_exists: true
